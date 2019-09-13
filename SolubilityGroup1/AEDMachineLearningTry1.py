@@ -69,8 +69,7 @@ plt.scatter(testdf["Actual Solubility"], testdf["PredictedSolubilities"])
 plt.xlabel("Actual Solubility")
 plt.ylabel("PredictedSolubilities")
 plt.savefig("plot.png")
-
-		
+	
 dump(clf, 'CLFTry1.joblib') 
 clf = load('CLFTry1.joblib')
 
