@@ -1,0 +1,34 @@
+<html>
+ <head>
+  <title>Solubility Predictor for AI3SD Hackahton</title>
+ </head>
+ <body>
+     <center>
+     <h1>Enter SMILES to have solubility calculated.</h1>
+     <form action="{{ url_for('predict') }}"" method="post">
+        <input type="text" name="SMILES">
+        <input type="submit">
+    </form>
+    </center>
+    {% if val %}
+    <center>
+    <canvas id="example-canvas" width="500" height="500"></canvas>
+    <script src="https://unpkg.com/smiles-drawer@1.0.10/dist/smiles-drawer.min.js"></script>
+    <script>
+        let input = document.getElementById('example-input');
+        let options = {};
+        
+        // Initialize the drawer
+        let smilesDrawer = new SmilesDrawer.Drawer(options);
+ 
+            // Clean the input (remove unrecognized characters, such as spaces and tabs) and parse it
+        SmilesDrawer.parse('{{SMILES}}', function(tree) {
+            // Draw to the canvas
+            smilesDrawer.draw(tree, 'example-canvas', 'light', false);
+        });
+    </script>
+    <h1>Your predicted solubility is: {{ val }} / M (logS)</h1>
+    </center>
+    {% endif %}
+ </body>
+</html>
